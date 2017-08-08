@@ -129,6 +129,8 @@ The unique API is `check(variable, type)`. And the library contains `Types` belo
  - **VT.oneOfType**
  - **VT.arrayOf**
  - **VT.shape**
+ - **VT.and**
+ - **VT.or**
 
 You can all the usage in the [test cases file](test.js).
 

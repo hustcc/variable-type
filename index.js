@@ -64,10 +64,22 @@
     }
   }
 
-  function _oneOfType(types) {
+  function _and(types) {
     return function(v) {
       var l = types.length;
       for(var i = 0; i < l; i ++) {
+        // 必须都符合才行
+        if (!_check(v, types[i])) return false;
+      }
+      return true;
+    }
+  }
+
+  function _or(types) {
+    return function(v) {
+      var l = types.length;
+      for(var i = 0; i < l; i ++) {
+        // 只有有一个符合即可
         if (_check(v, types[i])) return true;
       }
       return false;
@@ -105,7 +117,7 @@
   }
 
   return {
-    check: _check,
+    check: _check, // the unique API
     undefined: _commonType('undefined'),
     null: _commonType('null'),
     bool: _commonType('boolean'),
@@ -114,10 +126,12 @@
     string: _commonType('string'),
     object: _commonType('object'),
     array: _commonType('array'),
+    and: _and,
+    or: _or,
     any: _any,
     instanceOf: _instanceOf,
     oneOf: _oneOf,
-    oneOfType: _oneOfType,
+    oneOfType: _or, // cname of `or`, name from prop-types
     arrayOf: _arrayOf,
     shape: _shape
   };
