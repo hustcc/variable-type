@@ -19,8 +19,6 @@ import VT from 'variable-type'; // ES6
 var VT = require('variable-type'); // ES5 with npm
 ```
 
-Or just import it in HTML with script tag, you will get a global variable named `VariableType`.
-
 
 ## 2. Usage
 
