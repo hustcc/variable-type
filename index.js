@@ -114,6 +114,10 @@ function _any() {
   return true;
 }
 
+function _apply(func) {
+  return func;
+}
+
 module.exports = {
   check: _check, // the unique API
   undefined: _commonType('undefined'),
@@ -132,5 +136,6 @@ module.exports = {
   oneOf: _oneOf,
   oneOfType: _or, // cname of `or`, name from prop-types
   arrayOf: _arrayOf,
-  shape: _shape
+  shape: _shape,
+  apply: _apply
 };

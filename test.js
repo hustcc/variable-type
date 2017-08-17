@@ -208,6 +208,32 @@ describe('variable-type', function() {
     expect(VT.check(new Date(), VT.not(VT.number))).toBe(true);
   });
 
+  it(' - apply', function() {
+    expect(VT.check('hustcc', VT.apply(function (v) {
+      return v.indexOf('hustcc') !== -1;
+    }))).toBe(true);
+
+    expect(VT.check({
+      name: 'Hello'
+    }, VT.shape({
+      name: VT.apply(function (v) {
+        return v[0] === 'H';
+      })
+    }))).toBe(true);
+
+    expect(VT.check([1, 2, 3], VT.arrayOf(
+      VT.apply(function (v) {
+        return v < 4;
+      })
+    ))).toBe(true);
+
+    expect(VT.check([1, 2, 3], VT.arrayOf(
+      VT.apply(function (v) {
+        return v > 2;
+      })
+    ))).toBe(false);
+  });
+
   it(' - arrayOf', function() {
     expect(VT.check([1, 2, 3], VT.arrayOf(VT.number))).toBe(true);
     expect(VT.check(['1', '2'], VT.arrayOf(VT.string))).toBe(true);

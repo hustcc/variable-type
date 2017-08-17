@@ -122,13 +122,14 @@ The unique API is `check(variable, type)`. And the library contains `Types` belo
  - **VT.any**
  - **VT.null**
  - **VT.undefined**
- - **VT.instanceOf**
- - **VT.oneOf**
- - **VT.arrayOf**
- - **VT.shape**
- - **VT.and**
- - **VT.or**
- - **VT.not**
+ - **VT.instanceOf(Class)**
+ - **VT.oneOf(Array])**
+ - **VT.arrayOf(Type)**
+ - **VT.shape(TypeObject)**
+ - **VT.and(TypeArray)**
+ - **VT.or(TypeArray)**
+ - **VT.not(TypeArray)**
+ - **VT.apply(Function)**
 
 You can all the usage in the [test cases file](test.js).
 
