@@ -128,10 +128,10 @@ The unique API is `check(variable, type)`. And the library contains `Types` belo
  - **VT.shape(TypeObject)**
  - **VT.and(TypeArray)**
  - **VT.or(TypeArray)**
- - **VT.not(TypeArray)**
+ - **VT.not(Type)**
  - **VT.apply(Function)**
 
-You can all the usage in the [test cases file](test.js).
+You can see all the usage in the [test cases file](test.js).
 
 If more Types are needed, welcome to `send a pull request`, or put an issue to me.
 
