@@ -79,6 +79,12 @@ function _or(types) {
   }
 }
 
+function _not(type) {
+  return function(v) {
+    return !_check(v, type);
+  }
+}
+
 function _arrayOf(t) {
   return function(v) {
     if (what(v) !== 'array') return false;
@@ -96,7 +102,6 @@ function _shape(typeObj) {
     if (what(v) !== 'object') return false;
 
     for (var key in typeObj) {
-      // these is no need.
       // if (typeObj.hasOwnProperty(key)) {
       if(!_check(v[key], typeObj[key])) return false;
       // }
@@ -121,6 +126,7 @@ module.exports = {
   array: _commonType('array'),
   and: _and,
   or: _or,
+  not: _not,
   any: _any,
   instanceOf: _instanceOf,
   oneOf: _oneOf,

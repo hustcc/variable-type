@@ -178,12 +178,55 @@ describe('variable-type', function() {
     ]))).toBe(false);
   });
 
+  it(' - not', function() {
+    expect(VT.check('a', VT.not(VT.and([
+      VT.number
+    ])))).toBe(true);
+
+    expect(VT.check('a', VT.not(VT.and([
+      VT.string
+    ])))).toBe(false);
+
+    expect(VT.check('a', VT.not(VT.and([
+      VT.string,
+      VT.oneOf(['a', 'b'])
+    ])))).toBe(false);
+
+    // except cases
+    expect(VT.check(null, VT.not(VT.and([
+      VT.number
+    ])))).toBe(true);
+
+    expect(VT.check(undefined, VT.not(VT.and([
+      VT.number
+    ])))).toBe(true);
+
+    expect(VT.check(new Date(), VT.not(VT.and([
+      VT.number
+    ])))).toBe(true);
+
+    expect(VT.check(new Date(), VT.not(VT.number))).toBe(true);
+  });
+
   it(' - arrayOf', function() {
     expect(VT.check([1, 2, 3], VT.arrayOf(VT.number))).toBe(true);
     expect(VT.check(['1', '2'], VT.arrayOf(VT.string))).toBe(true);
     expect(VT.check([new Date()], VT.arrayOf(VT.instanceOf(Date)))).toBe(true);
     expect(VT.check(['1', 2], VT.arrayOf(VT.string))).toBe(false);
     expect(VT.check(['1', 2], VT.arrayOf(VT.func))).toBe(false);
+
+
+    expect(VT.check([
+      ['1', 2, '3'],
+      ['1', 2, '3']
+    ], VT.arrayOf(
+      VT.arrayOf(
+        VT.or([
+          VT.number,
+          VT.string
+        ])
+      )
+    ))).toBe(true);
 
     // except cases
     expect(VT.check(null, VT.arrayOf(VT.func))).toBe(false);
@@ -256,6 +299,55 @@ describe('variable-type', function() {
     expect(VT.check(new Date(), VT.shape({
       name: VT.string
     }))).toBe(false);
+  });
+
+  it(' - recursive', function() {
+    var types = {
+      name: VT.string
+    };
+    types.children = VT.or([
+      VT.arrayOf(VT.shape(types)),
+      VT.undefined
+    ]);
+    var recursiveTypes = VT.shape(types);
+
+    expect(VT.check({
+      name: 'Life',
+      children: [{
+        name: 'Animal',
+        children: [{
+          name: 'Dog',
+          children: [{
+            name: 'Dog1'
+          }, {
+            name: 'Dog2'
+          }]
+        }, {
+          name: 'Cat'
+        }
+        ]}, {
+        name: 'Plant'
+      }]
+    }, recursiveTypes)).toBe(true);
+
+    expect(VT.check({
+      name: 'Life',
+      children: [{
+        name: 'Animal',
+        children: [{
+          name: 'Dog',
+          children: [{
+            name: 888
+          }, {
+            name: 'Dog2'
+          }]
+        }, {
+          name: 'Cat'
+        }
+        ]}, {
+        name: 'Plant'
+      }]
+    }, recursiveTypes)).toBe(false);
   });
 
   it(' - complex usage', function() {

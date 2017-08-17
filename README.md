@@ -30,7 +30,7 @@ Here is some simple examples. More you can see in [test.js](test.js) file.
 var arr = ['hello', 'world', 25, new Date(1992, 8, 1)];
  
 var types = VT.arrayOf(
-  VT.oneOfType([
+  VT.or([
     VT.number,
     VT.string,
     VT.instanceOf(Date)
@@ -90,10 +90,10 @@ VT.check({
   e: VT.instanceOf(Date),
   f: VT.oneOf([1, '1']),
   g: VT.shape({
-    h: VT.oneOfType([
+    h: VT.or([
       VT.shape({
         i: VT.arrayOf(
-          VT.oneOfType([
+          VT.or([
             VT.number,
             VT.string,
             VT.bool,
@@ -124,11 +124,11 @@ The unique API is `check(variable, type)`. And the library contains `Types` belo
  - **VT.undefined**
  - **VT.instanceOf**
  - **VT.oneOf**
- - **VT.oneOfType**
  - **VT.arrayOf**
  - **VT.shape**
  - **VT.and**
  - **VT.or**
+ - **VT.not**
 
 You can all the usage in the [test cases file](test.js).
 
