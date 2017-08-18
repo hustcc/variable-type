@@ -1,9 +1,10 @@
 # variable-type
 
-> A simple javascript(`less then 1 kb`) library, runtime **type checking** for variable and similar objects. 
-> 一个非常简单（仅 1 kb）的用于做变量结构校验的 JavaScript 模块。
+> A high-performance javascript(`less then 1 kb`) library, runtime **type checking** for variable and similar objects.
 > 
-> Simplified from [prop-types](https://github.com/facebook/prop-types).
+> 一个非常简单的（仅 1 kb）高性能的用于做变量结构校验的 JavaScript 模块。
+> 
+> Inspired by [prop-types](https://github.com/facebook/prop-types), but **2.5x** faster then it.
 
 [![Ver](https://img.shields.io/npm/v/variable-type.svg)](https://www.npmjs.com/package/variable-type) [![Build Status](https://travis-ci.org/hustcc/variable-type.svg?branch=master)](https://travis-ci.org/hustcc/variable-type) [![Coverage Status](https://coveralls.io/repos/github/hustcc/variable-type/badge.svg?branch=master)](https://coveralls.io/github/hustcc/variable-type) [![npm download](https://img.shields.io/npm/dm/variable-type.svg)](https://www.npmjs.com/package/variable-type)
 
@@ -136,13 +137,17 @@ You can see all the usage in the [test cases file](test.js).
 If more Types are needed, welcome to `send a pull request`, or put an issue to me.
 
 
-## 4. Test
+## 4. Test & Perf
 
 ```
 npm i
 
 npm run test
+
+npm run perf
 ```
+
+> [OPS] variable-type / prop-types = 2.495
 
 
 ## License
