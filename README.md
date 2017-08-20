@@ -21,9 +21,65 @@ var VT = require('variable-type'); // ES5 with npm
 ```
 
 
-## 2. Usage
+## 2. API & Types
 
-Here is some simple examples. More you can see in [test.js](test.js) file.
+The unique API is `check(variable, type)`. And the library contains `Types` below:
+
+ - **VT.bool**
+ - **VT.func**
+ - **VT.number**
+ - **VT.string**
+ - **VT.object**
+ - **VT.array**
+ - **VT.any**
+ - **VT.null**
+ - **VT.undefined**
+ - **VT.instanceOf(Class)**
+ - **VT.oneOf(Array])**
+ - **VT.arrayOf(Type)**
+ - **VT.shape(TypeObject)**
+ - **VT.and(TypeArray)**
+ - **VT.or(TypeArray)**
+ - **VT.not(Type)**
+ - **VT.apply(Function)**
+
+You can see all the usage in the [test cases file](test.js).
+
+If more Types are needed, welcome to `send a pull request`, or put an issue to me.
+
+
+## 3. Usage examples
+
+Here is some examples. More you can see in [test.js](test.js) file.
+
+ - Simple usage
+
+```js
+VT.check(1992, VT.number);
+VT.check('hustcc', VT.string);
+VT.check(Math.min, VT.func);
+VT.check(true, VT.bool);
+VT.check({}, VT.object);
+VT.check([1, 2, 3], VT.array);
+VT.check(null, VT.null);
+VT.check(undefined, VT.undefined);
+VT.check(new Date(), VT.instanceOf(Date));
+VT.check('hustcc', VT.oneOf(['hustcc', 'hust', 'cc']));
+```
+
+ - And / Or / Not
+
+ ```js
+VT.check('hustcc', VT.not(VT.oneOf(['hustcc', 'cc'])));
+VT.check('hustcc', VT.and([
+	VT.string
+	VT.oneOf(['hustcc', 1992]),
+]));
+VT.check('hustcc', VT.or([
+	VT.number,
+	VT.string,
+]));
+ ```
 
  - `Array` type.
 
@@ -108,33 +164,6 @@ VT.check({
   })
 }); // Then will get true.
 ```
-
-
-## 3. API & Types
-
-The unique API is `check(variable, type)`. And the library contains `Types` below:
-
- - **VT.bool**
- - **VT.func**
- - **VT.number**
- - **VT.string**
- - **VT.object**
- - **VT.array**
- - **VT.any**
- - **VT.null**
- - **VT.undefined**
- - **VT.instanceOf(Class)**
- - **VT.oneOf(Array])**
- - **VT.arrayOf(Type)**
- - **VT.shape(TypeObject)**
- - **VT.and(TypeArray)**
- - **VT.or(TypeArray)**
- - **VT.not(Type)**
- - **VT.apply(Function)**
-
-You can see all the usage in the [test cases file](test.js).
-
-If more Types are needed, welcome to `send a pull request`, or put an issue to me.
 
 
 ## 4. Test & Perf
