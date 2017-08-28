@@ -482,6 +482,55 @@ describe('variable-type', function() {
     }))).toBe(false);
   });
 
+  it(' - optional', function() {
+    expect(VT.check('hustcc', VT.optional(VT.string))).toBe(true);
+    expect(VT.check(undefined, VT.optional(VT.string))).toBe(true);
+
+    expect(VT.check({
+      name: 'hustcc',
+      birthday: '1992-08-01'
+    }, VT.shape({
+      name: VT.string,
+      birthday: VT.string,
+      sex: VT.optional(VT.string)
+    }))).toBe(true);
+
+    expect(VT.check({
+      name: 'hustcc',
+      birthday: '1992-08-01',
+      sex: '1'
+    }, VT.shape({
+      name: VT.string,
+      birthday: VT.string,
+      sex: VT.optional(VT.string)
+    }))).toBe(true);
+
+    expect(VT.check({
+      name: 'hustcc',
+      birthday: '1992-08-01',
+      sex: 0
+    }, VT.shape({
+      name: VT.string,
+      birthday: VT.string,
+      sex: VT.optional(VT.string)
+    }))).toBe(false);
+    expect(VT.latest()).toEqual(0);
+  });
+
+  it(' - latest()', function() {
+    expect(VT.check(1, VT.in(['a', 1]))).toBe(true);
+    expect(VT.latest()).toEqual(1);
+    expect(VT.check('1', VT.in(['a', 1]))).toBe(false);
+    expect(VT.latest()).toEqual('1');
+    expect(VT.check(undefined, VT.in(['a', 1]))).toBe(false);
+    expect(VT.latest()).toEqual(undefined);
+    expect(VT.check(new Date(2017, 8, 1), VT.in(['a', 1]))).toBe(false);
+    expect(VT.latest()).toEqual(new Date(2017, 8, 1));
+
+    expect(VT.check({ a: '1' }, VT.in(['a', 1]))).toBe(false);
+    expect(VT.latest()).toEqual({ a: '1' });
+  });
+
   it(' - exception will return false', function() {
     expect(VT.check([1, 2, 3], null)).toBe(false);
   });

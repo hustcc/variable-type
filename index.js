@@ -11,12 +11,13 @@
  * @returns {string}
  * https://github.com/hustcc/what.js
  */
-function what (v) {
+function what(v) {
   if (v === null) return 'null';
   if (v !== Object(v)) return typeof v;
   return ({}).toString.call(v).slice(8, -1).toLowerCase();
 }
 
+var latest; // the latest check variable, for console.log / warn / error.
 /**
  * check whether the variable match the type.
  * How to use it? You can see the example in test.js
@@ -27,8 +28,11 @@ function what (v) {
  */
 function _check(variable, type) {
   try {
+    latest = variable;
     return type(variable);
-  } catch(_) {}
+  } catch(e) {
+    latest = e;
+  }
   return false;
 }
 
@@ -118,8 +122,21 @@ function _apply(func) {
   return func;
 }
 
+/**
+ * 扩展运算，可选的校验
+ * @param type
+ * @private
+ */
+function _optional(type) {
+   return _or([
+     type,
+     _commonType('undefined')
+   ]);
+}
+
 module.exports = {
   check: _check, // the unique API
+  latest: function() { return latest; },
   undefined: _commonType('undefined'),
   null: _commonType('null'),
   bool: _commonType('boolean'),
@@ -138,5 +155,6 @@ module.exports = {
   oneOfType: _or, // cname of `or`, name from prop-types
   arrayOf: _arrayOf,
   shape: _shape,
-  apply: _apply
+  apply: _apply,
+  optional: _optional
 };
