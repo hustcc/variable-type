@@ -4,7 +4,7 @@
 > 
 > 一个非常简单的（仅 1 kb）高性能的用于做变量结构校验的 JavaScript 模块。
 > 
-> Inspired by [prop-types](https://github.com/facebook/prop-types), but **2.5x** faster then it.
+> Inspired by [prop-types](https://github.com/facebook/prop-types).
 
 [![Ver](https://img.shields.io/npm/v/variable-type.svg)](https://www.npmjs.com/package/variable-type) [![Build Status](https://travis-ci.org/hustcc/variable-type.svg?branch=master)](https://travis-ci.org/hustcc/variable-type) [![Coverage Status](https://coveralls.io/repos/github/hustcc/variable-type/badge.svg?branch=master)](https://coveralls.io/github/hustcc/variable-type) [![npm download](https://img.shields.io/npm/dm/variable-type.svg)](https://www.npmjs.com/package/variable-type)
 
