@@ -64,16 +64,16 @@ VT.check([1, 2, 3], VT.array);
 VT.check(null, VT.null);
 VT.check(undefined, VT.undefined);
 VT.check(new Date(), VT.instanceOf(Date));
-VT.check('hustcc', VT.oneOf(['hustcc', 'hust', 'cc']));
+VT.check('hustcc', VT.in(['hustcc', 'hust', 'cc']));
 ```
 
  - And / Or / Not
 
  ```js
-VT.check('hustcc', VT.not(VT.oneOf(['hustcc', 'cc'])));
+VT.check('hustcc', VT.not(VT.in(['hustcc', 'cc'])));
 VT.check('hustcc', VT.and([
 	VT.string
-	VT.oneOf(['hustcc', 1992]),
+	VT.in(['hustcc', 1992]),
 ]));
 VT.check('hustcc', VT.or([
 	VT.number,
@@ -145,7 +145,7 @@ VT.check({
   c: VT.string,
   d: VT.func,
   e: VT.instanceOf(Date),
-  f: VT.oneOf([1, '1']),
+  f: VT.in([1, '1']),
   g: VT.shape({
     h: VT.or([
       VT.shape({
