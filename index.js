@@ -51,7 +51,7 @@ function _instanceOf(o) {
   }
 }
 
-function _oneOf(arr) {
+function _in(arr) {
   return function(v) {
     return arr.indexOf(v) >= 0;
   }
@@ -133,7 +133,8 @@ module.exports = {
   not: _not,
   any: _any,
   instanceOf: _instanceOf,
-  oneOf: _oneOf,
+  in: _in,
+  oneOf: _in, // cname of `in`, name from prop-types
   oneOfType: _or, // cname of `or`, name from prop-types
   arrayOf: _arrayOf,
   shape: _shape,

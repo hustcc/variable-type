@@ -35,7 +35,7 @@ The unique API is `check(variable, type)`. And the library contains `Types` belo
  - **VT.null**
  - **VT.undefined**
  - **VT.instanceOf(Class)**
- - **VT.oneOf(Array])**
+ - **VT.in(Array)**
  - **VT.arrayOf(Type)**
  - **VT.shape(TypeObject)**
  - **VT.and(TypeArray)**

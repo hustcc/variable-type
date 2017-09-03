@@ -83,6 +83,19 @@ describe('variable-type', function() {
     expect(VT.check(new Date(), VT.oneOf(['a', 1]))).toBe(false);
   });
 
+  it(' - in', function() {
+    expect(VT.check('a', VT.in(['a', 1]))).toBe(true);
+    expect(VT.check(1, VT.in(['a', 1]))).toBe(true);
+    expect(VT.check('1', VT.in(['a', 1]))).toBe(false);
+    expect(VT.check(undefined, VT.in(['a', 1]))).toBe(false);
+    expect(VT.check(new Date(), VT.in(['a', 1]))).toBe(false);
+
+    // except cases
+    expect(VT.check(null, VT.in(['a', 1]))).toBe(false);
+    expect(VT.check(undefined, VT.in(['a', 1]))).toBe(false);
+    expect(VT.check(new Date(), VT.in(['a', 1]))).toBe(false);
+  });
+
   it(' - any', function() {
     expect(VT.check('a', VT.any)).toBe(true);
     expect(VT.check(1, VT.any)).toBe(true);
@@ -161,7 +174,7 @@ describe('variable-type', function() {
 
     expect(VT.check('a', VT.and([
       VT.string,
-      VT.oneOf(['a', 'b'])
+      VT.in(['a', 'b'])
     ]))).toBe(true);
 
     // except cases
@@ -189,7 +202,7 @@ describe('variable-type', function() {
 
     expect(VT.check('a', VT.not(VT.and([
       VT.string,
-      VT.oneOf(['a', 'b'])
+      VT.in(['a', 'b'])
     ])))).toBe(false);
 
     // except cases
@@ -276,7 +289,7 @@ describe('variable-type', function() {
       c: VT.string,
       d: VT.func,
       e: VT.instanceOf(Date),
-      f: VT.oneOf([1, '1'])
+      f: VT.in([1, '1'])
     }))).toBe(true);
 
     expect(VT.check({
@@ -403,7 +416,7 @@ describe('variable-type', function() {
       c: VT.string,
       d: VT.func,
       e: VT.instanceOf(Date),
-      f: VT.oneOf([1, '1']),
+      f: VT.in([1, '1']),
       g: VT.shape({
         h: VT.oneOfType([
           VT.shape({
@@ -449,7 +462,7 @@ describe('variable-type', function() {
       c: VT.string,
       d: VT.func,
       e: VT.instanceOf(Date),
-      f: VT.oneOf([1, '1']),
+      f: VT.in([1, '1']),
       g: VT.shape({
         h: VT.oneOfType([
           VT.shape({
