@@ -42,6 +42,14 @@ describe('variable-type', function() {
     expect(VT.check(null, VT.instanceOf(Date))).toBe(false);
   });
 
+  it(' - typeOf', function() {
+    expect(VT.check(new Date(), VT.typeOf('date'))).toBe(true);
+    expect(VT.check(1, VT.typeOf('number'))).toBe(true);
+    expect(VT.check('hustcc', VT.typeOf('string'))).toBe(true);
+    expect(VT.check('hustcc', VT.typeOf('test'))).toBe(false);
+  });
+
+
   it(' - object', function() {
     expect(VT.check({}, VT.object)).toBe(true);
     expect(VT.check(undefined, VT.object)).toBe(false);

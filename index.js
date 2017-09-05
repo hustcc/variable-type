@@ -36,22 +36,15 @@ function _check(variable, type) {
   return false;
 }
 
-/**
- * 通用的类型执行方法
- * @param type: the type string of the var.
- * @returns {Function}
- * @private
- */
-function _commonType(type) {
-  return function(v) {
-    var t = what(v);
-    return t === type;
-  }
-}
-
 function _instanceOf(o) {
   return function(v) {
     return v instanceof o;
+  }
+}
+
+function _typeOf(s) {
+  return function(v) {
+    return what(v) === s;
   }
 }
 
@@ -130,26 +123,28 @@ function _apply(func) {
 function _optional(type) {
    return _or([
      type,
-     _commonType('undefined')
+     _typeOf('undefined')
    ]);
 }
 
 module.exports = {
   check: _check, // the unique API
   latest: function() { return latest; },
-  undefined: _commonType('undefined'),
-  null: _commonType('null'),
-  bool: _commonType('boolean'),
-  func: _commonType('function'),
-  number: _commonType('number'),
-  string: _commonType('string'),
-  object: _commonType('object'),
-  array: _commonType('array'),
+
+  undefined: _typeOf('undefined'),
+  null: _typeOf('null'),
+  bool: _typeOf('boolean'),
+  func: _typeOf('function'),
+  number: _typeOf('number'),
+  string: _typeOf('string'),
+  object: _typeOf('object'),
+  array: _typeOf('array'),
   and: _and,
   or: _or,
   not: _not,
   any: _any,
   instanceOf: _instanceOf,
+  typeOf: _typeOf,
   in: _in,
   oneOf: _in, // cname of `in`, name from prop-types
   oneOfType: _or, // cname of `or`, name from prop-types

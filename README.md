@@ -39,6 +39,7 @@ There are only 2 API:
  - **VT.null**
  - **VT.undefined**
  - **VT.instanceOf(Class)**
+ - **VT.typeOf(String)**
  - **VT.in(Array)**
  - **VT.arrayOf(Type)**
  - **VT.shape(TypeObject)**
