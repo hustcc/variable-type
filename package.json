@@ -2,8 +2,9 @@
   "name": "variable-type",
   "version": "0.1.4",
   "description": "Runtime type checking for variable and similar objects.",
-  "main": "index.js",
+  "main": "vt.js",
   "scripts": {
+    "min": "uglifyjs vt.js --compress --mangle --output vt.min.js",
     "test-travis": "nyc npm test && nyc report --reporter=lcov",
     "test": "mocha test.js",
     "perf": "node benchmark.js"
@@ -20,7 +21,7 @@
     "type-checking"
   ],
   "author": "hustcc",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/hustcc/variable-type/issues"
   },
@@ -31,6 +32,7 @@
     "expect": "^1.14.0",
     "mocha": "^2.4.5",
     "nyc": "^5.6.0",
-    "prop-types": "^15.5.10"
+    "prop-types": "^15.5.10",
+    "uglify-js": "^3.0.28"
   }
 }

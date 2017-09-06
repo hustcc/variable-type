@@ -2,5 +2,7 @@ node_modules/
 .nyc_output/
 coverage/
 test.js
+benchmark.js
 .gitignore
 .travis.yml
+index.html
