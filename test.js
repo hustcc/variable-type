@@ -542,4 +542,16 @@ describe('variable-type', function() {
   it(' - exception will return false', function() {
     expect(VT.check([1, 2, 3], null)).toBe(false);
   });
+
+  it(' - single usage', function() {
+    expect(VT.bool(true)).toBe(true);
+    expect(VT.func(Math.pow)).toBe(true);
+    expect(VT.number(123)).toBe(true);
+    expect(VT.string('hustcc')).toBe(true);
+    expect(VT.object({a: 1})).toBe(true);
+    expect(VT.array([1, 2, '3'])).toBe(true);
+    expect(VT.any(true)).toBe(true);
+    expect(VT.null(null)).toBe(true);
+    expect(VT.undefined(undefined)).toBe(true);
+  });
 });
