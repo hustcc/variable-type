@@ -1,11 +1,10 @@
 {
   "name": "variable-type",
-  "version": "0.1.4",
+  "version": "0.2.0",
   "description": "Runtime type checking for variable and similar objects.",
-  "main": "vt.js",
+  "main": "index.js",
   "scripts": {
-    "min": "uglifyjs vt.js --compress --mangle --output vt.min.js",
-    "test-travis": "nyc npm test && nyc report --reporter=lcov",
+    "coverage": "nyc npm test && nyc report --reporter=lcov",
     "test": "mocha test.js",
     "perf": "node benchmark.js"
   },

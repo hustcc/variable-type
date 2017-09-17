@@ -21,32 +21,37 @@ var obj = {
   }
 };
 
+var VTchecker = VT.shape({
+  a: VT.number,
+  b: VT.string,
+  c: VT.shape({
+    d: VT.instanceOf(Date),
+    e: VT.shape({
+      f: VT.arrayOf(VT.number),
+      g: VT.string
+    })
+  })
+});
+
+
+var PTchecker = PT.shape({
+  a: PT.number,
+  b: PT.string,
+  c: PT.shape({
+    d: PT.instanceOf(Date),
+    e: PT.shape({
+      f: PT.arrayOf(PT.number),
+      g: PT.string
+    })
+  })
+}).isRequired;
+
 suite
   .add('variable-type', function () {
-    VT.check(obj, VT.shape({
-      a: VT.number,
-      b: VT.string,
-      c: VT.shape({
-        d: VT.instanceOf(Date),
-        e: VT.shape({
-          f: VT.arrayOf(VT.number),
-          g: VT.string
-        })
-      })
-    }));
+    VTchecker.check(obj);
   })
   .add('prop-types', function () {
-    PT.checkPropTypes(PT.shape({
-      a: PT.number,
-      b: PT.string,
-      c: PT.shape({
-        d: PT.instanceOf(Date),
-        e: PT.shape({
-          f: PT.arrayOf(PT.number),
-          g: PT.string
-        })
-      })
-    }).isRequired, obj, '', '');
+    PT.checkPropTypes(PTchecker, obj, '', '');
   })
   .on('cycle', function (e) {
     console.log('' + e.target);

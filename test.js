@@ -3,349 +3,349 @@ var expect = require('expect');
 
 describe('variable-type', function() {
   it(' - bool', function() {
-    expect(VT.check(true, VT.bool)).toBe(true);
-    expect(VT.check(false, VT.bool)).toBe(true);
-    expect(VT.check(undefined, VT.bool)).toBe(false);
-    expect(VT.check('1', VT.bool)).toBe(false);
-    expect(VT.check(null, VT.bool)).toBe(false);
+    expect(VT.bool.check(true)).toBe(true);
+    expect(VT.bool.check(false)).toBe(true);
+    expect(VT.bool.check(undefined)).toBe(false);
+    expect(VT.bool.check('1')).toBe(false);
+    expect(VT.bool.check(null)).toBe(false);
   });
 
   it(' - func', function() {
-    expect(VT.check(Math.pow, VT.func)).toBe(true);
-    expect(VT.check(function _test() {}, VT.func)).toBe(true);
-    expect(VT.check(undefined, VT.func)).toBe(false);
-    expect(VT.check(1.2, VT.func)).toBe(false);
-    expect(VT.check('1', VT.func)).toBe(false);
-    expect(VT.check(null, VT.func)).toBe(false);
+    expect(VT.func.check(Math.pow)).toBe(true);
+    expect(VT.func.check(function _test() {})).toBe(true);
+    expect(VT.func.check(undefined)).toBe(false);
+    expect(VT.func.check(1.2)).toBe(false);
+    expect(VT.func.check('1')).toBe(false);
+    expect(VT.func.check(null)).toBe(false);
   });
 
   it(' - number', function() {
-    expect(VT.check(1, VT.number)).toBe(true);
-    expect(VT.check(1.2, VT.number)).toBe(true);
-    expect(VT.check(undefined, VT.number)).toBe(false);
-    expect(VT.check('1', VT.number)).toBe(false);
-    expect(VT.check(null, VT.number)).toBe(false);
+    expect(VT.number.check(1)).toBe(true);
+    expect(VT.number.check(1.2)).toBe(true);
+    expect(VT.number.check(undefined)).toBe(false);
+    expect(VT.number.check('1')).toBe(false);
+    expect(VT.number.check(null)).toBe(false);
   });
 
   it(' - string', function() {
-    expect(VT.check('1', VT.string)).toBe(true);
-    expect(VT.check('variable-type', VT.string)).toBe(true);
-    expect(VT.check(undefined, VT.string)).toBe(false);
-    expect(VT.check(1, VT.string)).toBe(false);
-    expect(VT.check(null, VT.string)).toBe(false);
+    expect(VT.string.check('1')).toBe(true);
+    expect(VT.string.check('variable-type')).toBe(true);
+    expect(VT.string.check(undefined)).toBe(false);
+    expect(VT.string.check(1)).toBe(false);
+    expect(VT.string.check(null)).toBe(false);
   });
 
   it(' - instanceOf', function() {
-    expect(VT.check(new Date(), VT.instanceOf(Date))).toBe(true);
-    expect(VT.check(undefined, VT.instanceOf(Date))).toBe(false);
-    expect(VT.check('1', VT.instanceOf(Date))).toBe(false);
-    expect(VT.check(null, VT.instanceOf(Date))).toBe(false);
+    expect(VT.instanceOf(Date).check(new Date())).toBe(true);
+    expect(VT.instanceOf(Date).check(undefined)).toBe(false);
+    expect(VT.instanceOf(Date).check('1')).toBe(false);
+    expect(VT.instanceOf(Date).check(null)).toBe(false);
   });
 
   it(' - typeOf', function() {
-    expect(VT.check(new Date(), VT.typeOf('date'))).toBe(true);
-    expect(VT.check(1, VT.typeOf('number'))).toBe(true);
-    expect(VT.check('hustcc', VT.typeOf('string'))).toBe(true);
-    expect(VT.check('hustcc', VT.typeOf('test'))).toBe(false);
+    expect(VT.typeOf('date').check(new Date())).toBe(true);
+    expect(VT.typeOf('number').check(1)).toBe(true);
+    expect(VT.typeOf('string').check('hustcc')).toBe(true);
+    expect(VT.typeOf('test').check('hustcc')).toBe(false);
   });
 
 
   it(' - object', function() {
-    expect(VT.check({}, VT.object)).toBe(true);
-    expect(VT.check(undefined, VT.object)).toBe(false);
-    expect(VT.check('1', VT.object)).toBe(false);
-    expect(VT.check(null, VT.object)).toBe(false);
+    expect(VT.object.check({})).toBe(true);
+    expect(VT.object.check(undefined)).toBe(false);
+    expect(VT.object.check('1')).toBe(false);
+    expect(VT.object.check(null)).toBe(false);
   });
 
   it(' - array', function() {
-    expect(VT.check([], VT.array)).toBe(true);
-    expect(VT.check(undefined, VT.array)).toBe(false);
-    expect(VT.check('1', VT.array)).toBe(false);
-    expect(VT.check(null, VT.array)).toBe(false);
+    expect(VT.array.check([])).toBe(true);
+    expect(VT.array.check(undefined)).toBe(false);
+    expect(VT.array.check('1')).toBe(false);
+    expect(VT.array.check(null)).toBe(false);
   });
 
   it(' - undefined', function() {
-    expect(VT.check(undefined, VT.undefined)).toBe(true);
-    expect(VT.check(null, VT.undefined)).toBe(false);
-    expect(VT.check(1, VT.undefined)).toBe(false);
-    expect(VT.check('str', VT.undefined)).toBe(false);
+    expect(VT.undefined.check(undefined)).toBe(true);
+    expect(VT.undefined.check(null)).toBe(false);
+    expect(VT.undefined.check(1)).toBe(false);
+    expect(VT.undefined.check('hustcc')).toBe(false);
   });
 
   it(' - null', function() {
-    expect(VT.check(undefined, VT.null)).toBe(false);
-    expect(VT.check(null, VT.null)).toBe(true);
-    expect(VT.check(1, VT.null)).toBe(false);
-    expect(VT.check('str', VT.null)).toBe(false);
+    expect(VT.null.check(undefined)).toBe(false);
+    expect(VT.null.check(null)).toBe(true);
+    expect(VT.null.check(1)).toBe(false);
+    expect(VT.null.check('hustcc')).toBe(false);
   });
 
   it(' - oneOf', function() {
-    expect(VT.check('a', VT.oneOf(['a', 1]))).toBe(true);
-    expect(VT.check(1, VT.oneOf(['a', 1]))).toBe(true);
-    expect(VT.check('1', VT.oneOf(['a', 1]))).toBe(false);
-    expect(VT.check(undefined, VT.oneOf(['a', 1]))).toBe(false);
-    expect(VT.check(new Date(), VT.oneOf(['a', 1]))).toBe(false);
+    expect(VT.oneOf(['a', 1]).check('a')).toBe(true);
+    expect(VT.oneOf(['a', 1]).check(1)).toBe(true);
+    expect(VT.oneOf(['a', 1]).check('1')).toBe(false);
+    expect(VT.oneOf(['a', 1]).check(undefined)).toBe(false);
+    expect(VT.oneOf(['a', 1]).check(new Date())).toBe(false);
 
     // except cases
-    expect(VT.check(null, VT.oneOf(['a', 1]))).toBe(false);
-    expect(VT.check(undefined, VT.oneOf(['a', 1]))).toBe(false);
-    expect(VT.check(new Date(), VT.oneOf(['a', 1]))).toBe(false);
+    expect(VT.oneOf(['a', 1]).check(null)).toBe(false);
+    expect(VT.oneOf(['a', 1]).check(undefined)).toBe(false);
+    expect(VT.oneOf(['a', 1]).check(new Date())).toBe(false);
   });
 
   it(' - in', function() {
-    expect(VT.check('a', VT.in(['a', 1]))).toBe(true);
-    expect(VT.check(1, VT.in(['a', 1]))).toBe(true);
-    expect(VT.check('1', VT.in(['a', 1]))).toBe(false);
-    expect(VT.check(undefined, VT.in(['a', 1]))).toBe(false);
-    expect(VT.check(new Date(), VT.in(['a', 1]))).toBe(false);
+    expect(VT.in(['a', 1]).check('a')).toBe(true);
+    expect(VT.in(['a', 1]).check(1)).toBe(true);
+    expect(VT.in(['a', 1]).check('1')).toBe(false);
+    expect(VT.in(['a', 1]).check(undefined)).toBe(false);
+    expect(VT.in(['a', 1]).check(new Date())).toBe(false);
 
     // except cases
-    expect(VT.check(null, VT.in(['a', 1]))).toBe(false);
-    expect(VT.check(undefined, VT.in(['a', 1]))).toBe(false);
-    expect(VT.check(new Date(), VT.in(['a', 1]))).toBe(false);
+    expect(VT.in(['a', 1]).check(null)).toBe(false);
+    expect(VT.in(['a', 1]).check(undefined)).toBe(false);
+    expect(VT.in(['a', 1]).check(new Date())).toBe(false);
   });
 
   it(' - any', function() {
-    expect(VT.check('a', VT.any)).toBe(true);
-    expect(VT.check(1, VT.any)).toBe(true);
-    expect(VT.check(undefined, VT.any)).toBe(true);
-    expect(VT.check(new Date(), VT.any)).toBe(true);
+    expect(VT.any.check('a')).toBe(true);
+    expect(VT.any.check(1)).toBe(true);
+    expect(VT.any.check(undefined)).toBe(true);
+    expect(VT.any.check(new Date())).toBe(true);
   });
 
   it(' - oneOfType', function() {
-    expect(VT.check('a', VT.oneOfType([
+    expect(VT.oneOfType([
       VT.number
-    ]))).toBe(false);
+    ]).check('a')).toBe(false);
 
-    expect(VT.check('a', VT.oneOfType([
+    expect(VT.oneOfType([
       VT.number,
       VT.string
-    ]))).toBe(true);
+    ]).check('a')).toBe(true);
 
-    expect(VT.check(new Date(), VT.oneOfType([
+    expect(VT.oneOfType([
       VT.number,
       VT.string,
       VT.instanceOf(Date)
-    ]))).toBe(true);
+    ]).check(new Date())).toBe(true);
 
     // except cases
-    expect(VT.check(null, VT.oneOfType([
+    expect(VT.oneOfType([
       VT.number
-    ]))).toBe(false);
+    ]).check(null)).toBe(false);
 
-    expect(VT.check(undefined, VT.oneOfType([
+    expect(VT.oneOfType([
       VT.number
-    ]))).toBe(false);
+    ]).check(undefined)).toBe(false);
 
-    expect(VT.check(new Date(), VT.oneOfType([
+    expect(VT.oneOfType([
       VT.number
-    ]))).toBe(false);
+    ]).check(new Date())).toBe(false);
   });
 
   it(' - or', function() {
-    expect(VT.check('a', VT.or([
+    expect(VT.or([
       VT.number
-    ]))).toBe(false);
+    ]).check('a')).toBe(false);
 
-    expect(VT.check('a', VT.or([
+    expect(VT.or([
       VT.number,
       VT.string
-    ]))).toBe(true);
+    ]).check('a')).toBe(true);
 
-    expect(VT.check(new Date(), VT.or([
+    expect(VT.or([
       VT.number,
       VT.string,
       VT.instanceOf(Date)
-    ]))).toBe(true);
+    ]).check(new Date())).toBe(true);
 
     // except cases
-    expect(VT.check(null, VT.or([
+    expect(VT.or([
       VT.number
-    ]))).toBe(false);
+    ]).check(null)).toBe(false);
 
-    expect(VT.check(undefined, VT.or([
+    expect(VT.or([
       VT.number
-    ]))).toBe(false);
+    ]).check(undefined)).toBe(false);
 
-    expect(VT.check(new Date(), VT.or([
+    expect(VT.or([
       VT.number
-    ]))).toBe(false);
+    ]).check(new Date())).toBe(false);
   });
 
   it(' - and', function() {
-    expect(VT.check('a', VT.and([
+    expect(VT.and([
       VT.number
-    ]))).toBe(false);
+    ]).check('a')).toBe(false);
 
-    expect(VT.check('a', VT.and([
+    expect(VT.and([
       VT.string
-    ]))).toBe(true);
+    ]).check('a')).toBe(true);
 
-    expect(VT.check('a', VT.and([
+    expect(VT.and([
       VT.string,
       VT.in(['a', 'b'])
-    ]))).toBe(true);
+    ]).check('a')).toBe(true);
 
     // except cases
-    expect(VT.check(null, VT.and([
+    expect(VT.and([
       VT.number
-    ]))).toBe(false);
+    ]).check(null)).toBe(false);
 
-    expect(VT.check(undefined, VT.and([
+    expect(VT.and([
       VT.number
-    ]))).toBe(false);
+    ]).check(undefined)).toBe(false);
 
-    expect(VT.check(new Date(), VT.and([
+    expect(VT.and([
       VT.number
-    ]))).toBe(false);
+    ]).check(new Date())).toBe(false);
   });
 
   it(' - not', function() {
-    expect(VT.check('a', VT.not(VT.and([
+    expect(VT.not(VT.and([
       VT.number
-    ])))).toBe(true);
+    ])).check('a')).toBe(true);
 
-    expect(VT.check('a', VT.not(VT.and([
+    expect(VT.not(VT.and([
       VT.string
-    ])))).toBe(false);
+    ])).check('a')).toBe(false);
 
-    expect(VT.check('a', VT.not(VT.and([
+    expect(VT.not(VT.and([
       VT.string,
       VT.in(['a', 'b'])
-    ])))).toBe(false);
+    ])).check('a')).toBe(false);
 
     // except cases
-    expect(VT.check(null, VT.not(VT.and([
+    expect(VT.not(VT.and([
       VT.number
-    ])))).toBe(true);
+    ])).check(null)).toBe(true);
 
-    expect(VT.check(undefined, VT.not(VT.and([
+    expect(VT.not(VT.and([
       VT.number
-    ])))).toBe(true);
+    ])).check(undefined)).toBe(true);
 
-    expect(VT.check(new Date(), VT.not(VT.and([
+    expect(VT.not(VT.and([
       VT.number
-    ])))).toBe(true);
+    ])).check(undefined)).toBe(true);
 
-    expect(VT.check(new Date(), VT.not(VT.number))).toBe(true);
+    expect(VT.not(VT.number).check(new Date())).toBe(true);
   });
 
   it(' - apply', function() {
-    expect(VT.check('hustcc', VT.apply(function (v) {
+    expect(VT.apply(function (v) {
       return v.indexOf('hustcc') !== -1;
-    }))).toBe(true);
+    }).check('hustcc')).toBe(true);
 
-    expect(VT.check({
-      name: 'Hello'
-    }, VT.shape({
+    expect(VT.shape({
       name: VT.apply(function (v) {
         return v[0] === 'H';
       })
-    }))).toBe(true);
+    }).check({
+      name: 'Hello'
+    })).toBe(true);
 
-    expect(VT.check([1, 2, 3], VT.arrayOf(
+    expect(VT.arrayOf(
       VT.apply(function (v) {
         return v < 4;
       })
-    ))).toBe(true);
+    ).check([1, 2, 3])).toBe(true);
 
-    expect(VT.check([1, 2, 3], VT.arrayOf(
+    expect(VT.arrayOf(
       VT.apply(function (v) {
         return v > 2;
       })
-    ))).toBe(false);
+    ).check([1, 2, 3])).toBe(false);
   });
 
   it(' - arrayOf', function() {
-    expect(VT.check([1, 2, 3], VT.arrayOf(VT.number))).toBe(true);
-    expect(VT.check(['1', '2'], VT.arrayOf(VT.string))).toBe(true);
-    expect(VT.check([new Date()], VT.arrayOf(VT.instanceOf(Date)))).toBe(true);
-    expect(VT.check(['1', 2], VT.arrayOf(VT.string))).toBe(false);
-    expect(VT.check(['1', 2], VT.arrayOf(VT.func))).toBe(false);
+    expect(VT.arrayOf(VT.number).check([1, 2, 3])).toBe(true);
+    expect(VT.arrayOf(VT.string).check(['1', '2'])).toBe(true);
+    expect(VT.arrayOf(VT.instanceOf(Date)).check([new Date()])).toBe(true);
+    expect(VT.arrayOf(VT.string).check(['1', 2])).toBe(false);
+    expect(VT.arrayOf(VT.func).check(['1', 2])).toBe(false);
 
 
-    expect(VT.check([
-      ['1', 2, '3'],
-      ['1', 2, '3']
-    ], VT.arrayOf(
+    expect(VT.arrayOf(
       VT.arrayOf(
         VT.or([
           VT.number,
           VT.string
         ])
       )
-    ))).toBe(true);
+    ).check([
+      ['1', 2, '3'],
+      ['1', 2, '3']
+    ])).toBe(true);
 
     // except cases
-    expect(VT.check(null, VT.arrayOf(VT.func))).toBe(false);
-    expect(VT.check(undefined, VT.arrayOf(VT.func))).toBe(false);
-    expect(VT.check(1, VT.arrayOf(VT.func))).toBe(false);
-    expect(VT.check('hello', VT.arrayOf(VT.func))).toBe(false);
-    expect(VT.check(new Date(), VT.arrayOf(VT.func))).toBe(false);
+    expect(VT.arrayOf(VT.func).check(null)).toBe(false);
+    expect(VT.arrayOf(VT.func).check(undefined)).toBe(false);
+    expect(VT.arrayOf(VT.func).check(1)).toBe(false);
+    expect(VT.arrayOf(VT.func).check('hello')).toBe(false);
+    expect(VT.arrayOf(VT.func).check(new Date())).toBe(false);
   });
 
   it(' - shape', function() {
-    expect(VT.check({
-      a: true,
-      b: 1,
-      c: 'str',
-      d: function() {},
-      e: new Date(),
-      f: '1'
-    }, VT.shape({
+    expect(VT.shape({
       a: VT.bool,
       b: VT.number,
       c: VT.string,
       d: VT.func,
       e: VT.instanceOf(Date),
       f: VT.in([1, '1'])
-    }))).toBe(true);
+    }).check({
+      a: true,
+      b: 1,
+      c: 'str',
+      d: function() {},
+      e: new Date(),
+      f: '1'
+    })).toBe(true);
 
-    expect(VT.check({
+    expect(VT.shape({
+      a: VT.bool,
+      b: VT.number,
+      c: VT.string,
+      d: VT.func,
+      e: VT.instanceOf(Date)
+    }).check({
       a: true,
       c: 'str',
       e: new Date()
-    }, VT.shape({
+    })).toBe(false);
+
+    expect(VT.shape({
       a: VT.bool,
       b: VT.number,
       c: VT.string,
       d: VT.func,
       e: VT.instanceOf(Date)
-    }))).toBe(false);
-
-    expect(VT.check({
+    }).check({
       a: true,
       c: 123,
       e: new Date()
-    }, VT.shape({
-      a: VT.bool,
-      b: VT.number,
-      c: VT.string,
-      d: VT.func,
-      e: VT.instanceOf(Date)
-    }))).toBe(false);
+    })).toBe(false);
 
-    expect(VT.check({
-      name: 'hustcc',
-      boy: true,
-      birthday: new Date(1992, 8, 1)
-    }, VT.shape({
+    expect(VT.shape({
       name: VT.string,
       boy: VT.bool,
       birthday: VT.instanceOf(Date)
-    }))).toBe(true);
+    }).check({
+      name: 'hustcc',
+      boy: true,
+      birthday: new Date(1992, 8, 1)
+    })).toBe(true);
 
     // except case
-    expect(VT.check(null, VT.shape({
+    expect(VT.shape({
       name: VT.string
-    }))).toBe(false);
+    }).check(null)).toBe(false);
 
-    expect(VT.check(undefined, VT.shape({
+    expect(VT.shape({
       name: VT.string
-    }))).toBe(false);
+    }).check(undefined)).toBe(false);
 
-    expect(VT.check(new Date(), VT.shape({
+    expect(VT.shape({
       name: VT.string
-    }))).toBe(false);
+    }).check(new Date())).toBe(false);
   });
 
   it(' - recursive', function() {
@@ -358,7 +358,7 @@ describe('variable-type', function() {
     ]);
     var recursiveTypes = VT.shape(types);
 
-    expect(VT.check({
+    expect(recursiveTypes.check({
       name: 'Life',
       children: [{
         name: 'Animal',
@@ -375,9 +375,9 @@ describe('variable-type', function() {
         ]}, {
         name: 'Plant'
       }]
-    }, recursiveTypes)).toBe(true);
+    })).toBe(true);
 
-    expect(VT.check({
+    expect(recursiveTypes.check({
       name: 'Life',
       children: [{
         name: 'Animal',
@@ -394,31 +394,11 @@ describe('variable-type', function() {
         ]}, {
         name: 'Plant'
       }]
-    }, recursiveTypes)).toBe(false);
+    })).toBe(false);
   });
 
   it(' - complex usage', function() {
-    expect(VT.check({
-      a: true,
-      b: 1,
-      c: 'str',
-      d: function() {},
-      e: new Date(),
-      f: '1',
-      g: {
-        h: {
-          i: [
-            '1',
-            2,
-            true,
-            {
-              j: function() {},
-              k: null
-            }
-          ]
-        }
-      }
-    }, VT.shape({
+    expect(VT.shape({
       a: VT.bool,
       b: VT.number,
       c: VT.string,
@@ -443,9 +423,7 @@ describe('variable-type', function() {
           })
         ])
       })
-    }))).toBe(true);
-
-    expect(VT.check({
+    }).check({
       a: true,
       b: 1,
       c: 'str',
@@ -459,12 +437,15 @@ describe('variable-type', function() {
             2,
             true,
             {
-              j: 1
+              j: function() {},
+              k: null
             }
           ]
         }
       }
-    }, VT.shape({
+    })).toBe(true);
+
+    expect(VT.shape({
       a: VT.bool,
       b: VT.number,
       c: VT.string,
@@ -487,71 +468,86 @@ describe('variable-type', function() {
           })
         ])
       })
-    }))).toBe(false);
+    }).check({
+      a: true,
+      b: 1,
+      c: 'str',
+      d: function() {},
+      e: new Date(),
+      f: '1',
+      g: {
+        h: {
+          i: [
+            '1',
+            2,
+            true,
+            {
+              j: 1
+            }
+          ]
+        }
+      }
+    })).toBe(false);
   });
 
   it(' - optional', function() {
-    expect(VT.check('hustcc', VT.optional(VT.string))).toBe(true);
-    expect(VT.check(undefined, VT.optional(VT.string))).toBe(true);
+    expect(VT.optional(VT.string).check('hustcc')).toBe(true);
+    expect(VT.optional(VT.string).check(undefined)).toBe(true);
 
-    expect(VT.check({
-      name: 'hustcc',
-      birthday: '1992-08-01'
-    }, VT.shape({
+    expect(VT.shape({
       name: VT.string,
       birthday: VT.string,
       sex: VT.optional(VT.string)
-    }))).toBe(true);
+    }).check({
+      name: 'hustcc',
+      birthday: '1992-08-01'
+    })).toBe(true);
 
-    expect(VT.check({
+    expect(VT.shape({
+      name: VT.string,
+      birthday: VT.string,
+      sex: VT.optional(VT.string)
+    }).check({
       name: 'hustcc',
       birthday: '1992-08-01',
       sex: '1'
-    }, VT.shape({
+    })).toBe(true);
+
+    expect(VT.shape({
       name: VT.string,
       birthday: VT.string,
       sex: VT.optional(VT.string)
-    }))).toBe(true);
-
-    expect(VT.check({
+    }).check({
       name: 'hustcc',
       birthday: '1992-08-01',
       sex: 0
-    }, VT.shape({
-      name: VT.string,
-      birthday: VT.string,
-      sex: VT.optional(VT.string)
-    }))).toBe(false);
-    expect(VT.latest()).toEqual(0);
+    })).toBe(false);
   });
 
-  it(' - latest()', function() {
-    expect(VT.check(1, VT.in(['a', 1]))).toBe(true);
-    expect(VT.latest()).toEqual(1);
-    expect(VT.check('1', VT.in(['a', 1]))).toBe(false);
-    expect(VT.latest()).toEqual('1');
-    expect(VT.check(undefined, VT.in(['a', 1]))).toBe(false);
-    expect(VT.latest()).toEqual(undefined);
-    expect(VT.check(new Date(2017, 8, 1), VT.in(['a', 1]))).toBe(false);
-    expect(VT.latest()).toEqual(new Date(2017, 8, 1));
-
-    expect(VT.check({ a: '1' }, VT.in(['a', 1]))).toBe(false);
-    expect(VT.latest()).toEqual({ a: '1' });
-  });
-
-  it(' - exception will return false', function() {
-    expect(VT.check([1, 2, 3], null)).toBe(false);
-  });
+  // it(' - latest()', function() {
+  //   expect((1, VT.in(['a', 1]))).toBe(true);
+  //   expect(VT.latest()).toEqual(1);
+  //   expect(('1', VT.in(['a', 1]))).toBe(false);
+  //   expect(VT.latest()).toEqual('1');
+  //   expect((undefined, VT.in(['a', 1]))).toBe(false);
+  //   expect(VT.latest()).toEqual(undefined);
+  //   expect((new Date(2017, 8, 1), VT.in(['a', 1]))).toBe(false);
+  //   expect(VT.latest()).toEqual(new Date(2017, 8, 1));
+  //
+  //   expect(({ a: '1' }, VT.in(['a', 1]))).toBe(false);
+  //   expect(VT.latest()).toEqual({ a: '1' });
+  // });
+console.log(VT.any);
 
   it(' - single usage', function() {
-    expect(VT.bool(true)).toBe(true);
-    expect(VT.func(Math.pow)).toBe(true);
-    expect(VT.number(123)).toBe(true);
-    expect(VT.string('hustcc')).toBe(true);
-    expect(VT.object({a: 1})).toBe(true);
-    expect(VT.array([1, 2, '3'])).toBe(true);
-    expect(VT.any(true)).toBe(true);
-    expect(VT.null(null)).toBe(true);
-    expect(VT.undefined(undefined)).toBe(true);
+    expect(VT.bool.check(true)).toBe(true);
+    expect(VT.func.check(Math.pow)).toBe(true);
+    expect(VT.number.check(123)).toBe(true);
+    expect(VT.string.check('hustcc')).toBe(true);
+    expect(VT.object.check({a: 1})).toBe(true);
+    expect(VT.array.check([1, 2, '3'])).toBe(true);
+    expect(VT.any.check(true)).toBe(true);
+    expect(VT.null.check(null)).toBe(true);
+    expect(VT.undefined.check(undefined)).toBe(true);
   });
 });
