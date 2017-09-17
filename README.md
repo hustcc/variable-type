@@ -23,11 +23,9 @@ var VT = require('variable-type'); // ES5 with npm
 
 ## 2. API & Types
 
-There are only 2 API:
- - `VT.check(variable, type)`. Check whether the variable can match the type.
- - `VT.latest()`. Get the latest check variable / error when false.
+Before use it to check variable, you should make your Types.
  
- And the library contains `Types` below:
+And the library contains `Types` below:
 
  - **VT.bool**
  - **VT.func**
@@ -61,30 +59,32 @@ Here is some examples. More you can see in [test.js](test.js) file.
  - Simple usage
 
 ```js
-VT.check(1992, VT.number);
-VT.check('hustcc', VT.string);
-VT.check(Math.min, VT.func);
-VT.check(true, VT.bool);
-VT.check({}, VT.object);
-VT.check([1, 2, 3], VT.array);
-VT.check(null, VT.null);
-VT.check(undefined, VT.undefined);
-VT.check(new Date(), VT.instanceOf(Date));
-VT.check('hustcc', VT.in(['hustcc', 'hust', 'cc']));
+VT.number.check(1992);
+VT.string.check('hustcc');
+VT.func.check(Math.min);
+VT.bool.check(true);
+VT.object.check({});
+VT.array.check([1, 2, 3]);
+VT.null.check(null);
+VT.undefined.check(undefined);
+VT.instanceOf(Date).check(new Date());
+VT.in(['hustcc', 'hust', 'cc']).check('hustcc');
 ```
 
  - And / Or / Not
 
  ```js
-VT.check('hustcc', VT.not(VT.in(['hustcc', 'cc'])));
-VT.check('hustcc', VT.and([
+VT.not(VT.in(['hustcc', 'cc'])).check('hustcc');
+
+VT.and([
 	VT.string
 	VT.in(['hustcc', 1992]),
-]));
-VT.check('hustcc', VT.or([
+]).check('hustcc');
+
+VT.or([
 	VT.number,
 	VT.string,
-]));
+]).check('hustcc');
  ```
 
  - `Array` type.
@@ -100,7 +100,7 @@ var types = VT.arrayOf(
   ])
 );
 
-VT.check(arr, types); // will get true. 
+types.check(arr); // will get true. 
 ```
 
  - `Object` type.
@@ -118,7 +118,7 @@ var types = VT.shape({
   birthday: VT.instanceOf(Date)
 });
 
-VT.check(obj, types); // will get true. 
+types.check(obj); // will get true. 
 ```
 
  - `Complex` example.
@@ -126,26 +126,7 @@ VT.check(obj, types); // will get true.
 ```js
 
 // The only API `check`.
-VT.check({
-  a: true,
-  b: 1,
-  c: 'str',
-  d: function() {},
-  e: new Date(),
-  f: '1',
-  g: {
-    h: {
-      i: [
-        '1',
-        2,
-        true,
-        {
-          j: function() {}
-        }
-      ]
-    }
-  }
-}, VT.shape({
+VT.shape({
   a: VT.bool,
   b: VT.number,
   c: VT.string,
@@ -168,19 +149,38 @@ VT.check({
       })
     ])
   })
+}).check({
+  a: true,
+  b: 1,
+  c: 'str',
+  d: function() {},
+  e: new Date(),
+  f: '1',
+  g: {
+    h: {
+      i: [
+        '1',
+        2,
+        true,
+        {
+          j: function() {}
+        }
+      ]
+    }
+  }
 }); // Then will get true.
 ```
 
  - Optional type
 
 ```js
-VT.check({
-  name: 'hustcc',
-  birthday: '1992-08-01'
-}, VT.shape({
+VT.shape({
   name: VT.string,
   birthday: VT.string,
   sex: VT.optional(VT.string)
+}).check({
+  name: 'hustcc',
+  birthday: '1992-08-01'
 }); // Then will get true.
 ```
 

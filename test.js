@@ -537,7 +537,6 @@ describe('variable-type', function() {
   //   expect(({ a: '1' }, VT.in(['a', 1]))).toBe(false);
   //   expect(VT.latest()).toEqual({ a: '1' });
   // });
-console.log(VT.any);
 
   it(' - single usage', function() {
     expect(VT.bool.check(true)).toBe(true);
