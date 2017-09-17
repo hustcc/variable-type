@@ -22,13 +22,13 @@ function Type(type) {
  * @returns {boolean}
  */
 Type.prototype.check = function (variable) {
-  try {
+  // try {
     // this.latest = variable; // the latest check variable, for console.log / warn / error.
-    return this.type(variable);
-  } catch(_) {
+  return this.type(variable);
+  // } catch(_) {
     // this.latest = e;
-    return false;
-  }
+    // return false;
+  // }
 };
 
 
