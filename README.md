@@ -45,7 +45,11 @@ And the library contains `Types` below:
  - **VT.or(TypeArray)**
  - **VT.not(Type)**
  - **VT.apply(Function)**
- - **VT.optional(Type)**: match the Type or VT.undefined.
+
+The `Type` has 2 API:
+
+ - **check(value)**
+ - **optional()**: convent the type into optional.
 
 You can see all the usage in the [test cases file](test.js).
 
@@ -177,7 +181,7 @@ VT.shape({
 VT.shape({
   name: VT.string,
   birthday: VT.string,
-  sex: VT.optional(VT.string)
+  sex: VT.string.optional()
 }).check({
   name: 'hustcc',
   birthday: '1992-08-01'

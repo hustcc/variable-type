@@ -490,14 +490,14 @@ describe('variable-type', function() {
     })).toBe(false);
   });
 
-  it(' - optional', function() {
-    expect(VT.optional(VT.string).check('hustcc')).toBe(true);
-    expect(VT.optional(VT.string).check(undefined)).toBe(true);
+  it(' - optional()', function() {
+    expect(VT.string.optional().check('hustcc')).toBe(true);
+    expect(VT.string.optional().check(undefined)).toBe(true);
 
     expect(VT.shape({
       name: VT.string,
       birthday: VT.string,
-      sex: VT.optional(VT.string)
+      sex: VT.string.optional()
     }).check({
       name: 'hustcc',
       birthday: '1992-08-01'
@@ -506,7 +506,7 @@ describe('variable-type', function() {
     expect(VT.shape({
       name: VT.string,
       birthday: VT.string,
-      sex: VT.optional(VT.string)
+      sex: VT.string.optional()
     }).check({
       name: 'hustcc',
       birthday: '1992-08-01',
@@ -516,7 +516,7 @@ describe('variable-type', function() {
     expect(VT.shape({
       name: VT.string,
       birthday: VT.string,
-      sex: VT.optional(VT.string)
+      sex: VT.string.optional()
     }).check({
       name: 'hustcc',
       birthday: '1992-08-01',

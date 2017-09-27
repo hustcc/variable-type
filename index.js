@@ -22,15 +22,20 @@ function Type(type) {
  * @returns {boolean}
  */
 Type.prototype.check = function (variable) {
-  // try {
-    // this.latest = variable; // the latest check variable, for console.log / warn / error.
   return this.type(variable);
-  // } catch(_) {
-    // this.latest = e;
-    // return false;
-  // }
 };
 
+/**
+ * convent a type into optional.
+ * 扩展运算，可选的校验
+ * @returns Type
+ */
+Type.prototype.optional = function () {
+  return _or([
+    this,
+    _typeOf('undefined')
+  ]);
+};
 
 
 /**
@@ -188,12 +193,12 @@ function _any() {
  * @param type
  * @private
  */
-function _optional(type) {
-   return _or([
-     type,
-     _typeOf('undefined')
-   ]);
-}
+// function _optional(type) {
+//    return _or([
+//      type,
+//      _typeOf('undefined')
+//    ]);
+// }
 
 module.exports = {
   // check: _check, // the unique API
@@ -218,5 +223,5 @@ module.exports = {
   arrayOf: _arrayOf,
   shape: _shape,
   apply: _apply,
-  optional: _optional
+  // optional: _optional
 };
