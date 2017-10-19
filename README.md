@@ -199,7 +199,7 @@ npm run test
 npm run perf
 ```
 
-> [OPS] variable-type / prop-types = 2.495
+> [OPS] variable-type / prop-types = 5.033
 
 
 ## License

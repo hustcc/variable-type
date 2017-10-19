@@ -22,7 +22,10 @@ function Type(type) {
  * @returns {boolean}
  */
 Type.prototype.check = function (variable) {
-  return this.type(variable);
+  try {
+    return this.type(variable);
+  } catch (_) {}
+  return false;
 };
 
 /**
@@ -33,7 +36,7 @@ Type.prototype.check = function (variable) {
 Type.prototype.optional = function () {
   return _or([
     this,
-    _typeOf('undefined')
+    _simpleTypeOf('undefined')
   ]);
 };
 
@@ -75,6 +78,18 @@ function _typeOf(s) {
 }
 
 /**
+ * 简单类型的判断，用于性能优化
+ * @param s
+ * @returns {Type}
+ * @private
+ */
+function _simpleTypeOf(s) {
+  return new Type(function(v) {
+    return typeof v === s;
+  });
+}
+
+/**
  * 是否在数组中
  * @param arr
  * @returns {Type}
@@ -95,7 +110,7 @@ function _in(arr) {
 function _and(types) {
   return new Type(function(v) {
     var l = types.length;
-    for(var i = 0; i < l; i ++) {
+    for (var i = 0; i < l; i ++) {
       // 必须都符合才行
       if (!types[i].check(v)) return false;
     }
@@ -112,7 +127,7 @@ function _and(types) {
 function _or(types) {
   return new Type(function(v) {
     var l = types.length;
-    for(var i = 0; i < l; i ++) {
+    for (var i = 0; i < l; i ++) {
       // 只有有一个符合即可
       if (types[i].check(v)) return true;
     }
@@ -140,10 +155,10 @@ function _not(type) {
  */
 function _arrayOf(type) {
   return new Type(function(v) {
-    if (what(v) !== 'array') return false;
-
+    // TODO v should be Array
     var l = v.length;
-    for(var i = 0; i < l; i ++) {
+    if (l === undefined) return false;
+    for (var i = 0; i < l; i ++) {
       if (!type.check(v[i])) return false;
     }
     return true;
@@ -158,8 +173,6 @@ function _arrayOf(type) {
  */
 function _shape(typeObj) {
   return new Type(function(v) {
-    if (what(v) !== 'object') return false;
-
     for (var key in typeObj) {
       // if (typeObj.hasOwnProperty(key)) {
       if(!typeObj[key].check(v[key])) return false;
@@ -179,42 +192,19 @@ function _apply(func) {
   return new Type(func);
 }
 
-/**
- * 所有
- * @returns {boolean}
- * @private
- */
-function _any() {
-  return true;
-}
-
-/**
- * 扩展运算，可选的校验
- * @param type
- * @private
- */
-// function _optional(type) {
-//    return _or([
-//      type,
-//      _typeOf('undefined')
-//    ]);
-// }
-
 module.exports = {
-  // check: _check, // the unique API
-  // latest: function() { return latest; },
-  undefined: _typeOf('undefined'),
+  undefined: _simpleTypeOf('undefined'),
+  bool: _simpleTypeOf('boolean'),
+  func: _simpleTypeOf('function'),
+  number: _simpleTypeOf('number'),
+  string: _simpleTypeOf('string'),
   null: _typeOf('null'),
-  bool: _typeOf('boolean'),
-  func: _typeOf('function'),
-  number: _typeOf('number'),
-  string: _typeOf('string'),
   object: _typeOf('object'),
   array: _typeOf('array'),
   and: _and,
   or: _or,
   not: _not,
-  any: new Type(_any),
+  any: new Type(function() { return true; }),
   instanceOf: _instanceOf,
   typeOf: _typeOf,
   in: _in,
@@ -222,6 +212,5 @@ module.exports = {
   oneOfType: _or, // cname of `or`, name from prop-types
   arrayOf: _arrayOf,
   shape: _shape,
-  apply: _apply,
-  // optional: _optional
+  apply: _apply
 };

@@ -37,7 +37,7 @@ suite
   })
   .add('prop-types', function () {
     PT.checkPropTypes(PT.shape({
-      a: PT.number,
+      a: PT.number.isRequired,
       b: PT.string,
       c: PT.shape({
         d: PT.instanceOf(Date),
@@ -46,7 +46,7 @@ suite
           g: PT.string
         })
       })
-    }).isRequired, obj, '', '');
+    }).isRequired, obj, 'props', 'MyComp');
   })
   .on('cycle', function (e) {
     console.log('' + e.target);
