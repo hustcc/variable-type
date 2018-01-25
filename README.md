@@ -51,14 +51,14 @@ The `Type` has 2 API:
  - **check(value)**
  - **optional()**: convent the type into optional.
 
-You can see all the usage in the [test cases file](test.js).
+You can see all the usage in the [test cases file](tests/test.js).
 
 If more Types are needed, welcome to `send a pull request`, or put an issue to me.
 
 
 ## 3. Usage examples
 
-Here is some examples. More you can see in [test.js](test.js) file.
+Here is some examples. More you can see in [test.js](tests/test.js) file.
 
  - Simple usage
 
