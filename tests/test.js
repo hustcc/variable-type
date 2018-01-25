@@ -1,4 +1,4 @@
-var VT = require('./');
+var VT = require('../src/index');
 var expect = require('expect');
 
 describe('variable-type', function() {

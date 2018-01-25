@@ -6,7 +6,7 @@
 var Benchmark = require('benchmark');
 var suite = new Benchmark.Suite();
 
-var VT = require('./');
+var VT = require('..');
 var PT = require('prop-types');
 
 var obj = {
