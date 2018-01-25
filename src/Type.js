@@ -2,9 +2,6 @@
  * Created by hustcc on 17/08/01.
  */
 
-// var or = require('./or');
-// var typeOf = require('./typeOf');
-
 /**
  * Type class
  * @param type
