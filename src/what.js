@@ -20,7 +20,7 @@ function what(v) {
     t === 'function' ||
     t === 'boolean'
   ) return t;
-  if (v !== Object(v)) return t;
+  // if (v !== Object(v)) return t;
   return ({}).toString.call(v).slice(8, -1).toLowerCase();
 }
 
