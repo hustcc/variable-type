@@ -15,9 +15,9 @@
 
 Then import it.
 
-```js
-import VT from 'variable-type'; // ES6
-var VT = require('variable-type'); // ES5 with npm
+```typescript
+import VT from 'variable-type'; // ES6/Typescript
+const VT = require('variable-type').default; // ES5 with npm
 ```
 
 
@@ -51,14 +51,14 @@ The `Type` has 2 API:
  - **check(value)**
  - **optional()**: convent the type into optional.
 
-You can see all the usage in the [test cases file](tests/test.js).
+You can see all the usage in the [test cases file](tests/test.ts).
 
 If more Types are needed, welcome to `send a pull request`, or put an issue to me.
 
 
 ## 3. Usage examples
 
-Here is some examples. More you can see in [test.js](tests/test.js) file.
+Here is some examples. More you can see in [test.ts](tests/test.ts) file.
 
  - Simple usage
 

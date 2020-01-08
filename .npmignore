@@ -1,8 +1,11 @@
 node_modules/
 .nyc_output/
 coverage/
-test.js
-benchmark.js
+test.ts
+benchmark.ts
 .gitignore
 .travis.yml
 index.html
+src/
+dist/perf/
+dist/tests/

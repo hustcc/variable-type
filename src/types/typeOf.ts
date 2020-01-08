@@ -2,15 +2,15 @@
  * Created by hustcc on 17/08/01.
  */
 
-var Type = require('../Type');
-var what = require('../what');
+import Type from '../Type';
+import what from '../what';
 
 /**
  * 类型判断
  * @param s
  * @returns {Type}
  */
-module.exports = function(s) {
+export default function(s: any) {
   return new Type(function(v) {
     return what(v) === s;
   });

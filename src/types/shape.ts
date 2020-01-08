@@ -2,20 +2,17 @@
  * Created by hustcc on 17/08/01.
  */
 
-var Type = require('../Type');
+import Type from '../Type';
 
 /**
  * object 结构
  * @param typeObj
  * @returns {Type}
  */
-module.exports = function(typeObj) {
+export default function(typeObj: Record<string, Type>) {
   return new Type(function(v) {
-    for (var key in typeObj) {
-      // if (typeObj.hasOwnProperty(key)) {
+    for (const key in typeObj)
       if(!typeObj[key].check(v[key])) return false;
-      // }
-    }
     return true;
   });
 };

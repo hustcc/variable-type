@@ -9,10 +9,10 @@
  * https://github.com/hustcc/what.js
  */
 
-function what(v) {
+export default function what(v: any) {
   if (v === null) return 'null';
   if (v === undefined) return 'undefined';
-  var t = typeof v;
+  const t = typeof v;
   // performance opt
   if (
     t === 'string' ||
@@ -20,8 +20,6 @@ function what(v) {
     t === 'function' ||
     t === 'boolean'
   ) return t;
-  // if (v !== Object(v)) return t;
+
   return ({}).toString.call(v).slice(8, -1).toLowerCase();
 }
-
-module.exports = what;
