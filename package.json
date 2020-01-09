@@ -6,7 +6,6 @@
   "scripts": {
     "coverage": "jest --coverage",
     "test": "jest",
-    "test:watch": "jest --coverage --watchAll",
     "perf": "ts-node perf/benchmark.ts",
     "build": "tsc"
   },
@@ -38,5 +37,12 @@
     "ts-jest": "^24.3.0",
     "ts-node": "^8.5.4",
     "typescript": "^3.7.4"
+  },
+  "jest": {
+    "roots": ["tests"],
+    "preset": "ts-jest",
+    "testEnvironment": "node",
+    "collectCoverageFrom": ["src/**/*.ts"],
+    "coveragePathIgnorePatterns": ["src/*.d.ts"]
   }
 }
