@@ -1,28 +1,19 @@
 {
   "compilerOptions": {
-    "allowSyntheticDefaultImports": true,
-    "baseUrl": ".",
-    "esModuleInterop": true,
-    "lib": ["es2019", "dom"],
+    "outDir": "lib",
     "module": "commonjs",
+    "target": "es5",
     "moduleResolution": "node",
-    "noImplicitReturns": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
+    "experimentalDecorators": true,
     "declaration": true,
-    "outDir": "dist",
-    "paths": {
-      "*": [
-        "node_modules/*"
-      ]
-    },
     "sourceMap": true,
-    "strict": true,
-    "target": "es2019"
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "pretty": true,
+    "lib": ["dom", "esnext"],
+    "skipLibCheck": true,
+    "sourceRoot": "src"
   },
-  "include": [
-    "src/**/*",
-    "tests/**/*",
-    "perf/**/*"
-  ]
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
 }
