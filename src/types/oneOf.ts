@@ -10,7 +10,5 @@ import Type from '../Type';
  * @returns {Type}
  */
 export default function(arr: any[]): Type {
-  return new Type(function(v) {
-    return arr.includes(v);
-  })
+  return new Type(v => arr.includes(v));
 };

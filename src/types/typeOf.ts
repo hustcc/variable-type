@@ -11,7 +11,5 @@ import what from '../what';
  * @returns {Type}
  */
 export default function(s: any): Type {
-  return new Type(function(v) {
-    return what(v) === s;
-  });
+  return new Type(v => what(v) === s);
 };

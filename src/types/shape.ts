@@ -11,7 +11,7 @@ import Type from '../Type';
  */
 
 export default function(typeObj: Record<string, Type>): Type {
-  return new Type(function(v) {
+  return new Type(v => {
     for (const key in typeObj)
       if(!typeObj[key].check(v[key]))
         return false;

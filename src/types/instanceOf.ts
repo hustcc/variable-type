@@ -10,7 +10,5 @@ import Type from '../Type';
  * @returns {Type}
  */
 export default function(o: any): Type {
-  return new Type(function(v) {
-    return v instanceof o;
-  });
+  return new Type(v => v instanceof o);
 };

@@ -10,7 +10,5 @@ import Type from '../Type';
  * @returns {Type}
  */
 export default function(type: Type): Type {
-  return new Type(function(v) {
-    return !type.check(v);
-  });
+  return new Type(v => !type.check(v));
 };
