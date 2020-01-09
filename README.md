@@ -16,8 +16,7 @@
 Then import it.
 
 ```typescript
-import VT from 'variable-type'; // ES6/Typescript
-const VT = require('variable-type').default; // ES5 with npm
+import VT from 'variable-type';
 ```
 
 
