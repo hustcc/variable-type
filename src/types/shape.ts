@@ -9,10 +9,12 @@ import Type from '../Type';
  * @param typeObj
  * @returns {Type}
  */
-export default function(typeObj: Record<string, Type>) {
+
+export default function(typeObj: Record<string, Type>): Type {
   return new Type(function(v) {
     for (const key in typeObj)
-      if(!typeObj[key].check(v[key])) return false;
+      if(!typeObj[key].check(v[key]))
+        return false;
     return true;
   });
 };

@@ -9,7 +9,7 @@ import Type from '../Type';
  * @param types
  * @returns {Type}
  */
-export default function(types: Type[]) {
+export default function(types: Type[]): Type {
   return new Type(function(v) {
     const l = types.length;
     for (let i = 0; i < l; ++i) {

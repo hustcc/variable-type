@@ -10,7 +10,7 @@ import what from '../what';
  * @param s
  * @returns {Type}
  */
-export default function(s: any) {
+export default function(s: any): Type {
   return new Type(function(v) {
     return what(v) === s;
   });

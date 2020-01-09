@@ -349,11 +349,7 @@ describe('variable-type', () => {
   });
 
   test('recursive', () => {
-    type RecursiveType = {
-      name: Type;
-      children?: Type;
-    };
-    const types: RecursiveType = {
+    const types: Record<string, Type> = {
       name: VT.string
     };
     types.children = VT.or([

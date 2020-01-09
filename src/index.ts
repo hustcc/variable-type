@@ -4,7 +4,7 @@
  * 👏 08-01 is my birthday on ID card.
  */
 
-import Type from './Type';
+import Type, {TypeChecker} from './Type';
 
 import and from './types/and';
 import apply from './types/apply';
@@ -16,7 +16,10 @@ import or from './types/or';
 import shape from './types/shape';
 import typeOf from './types/typeOf';
 
-type FunctionThatReturnsType = (toCheck: any) => Type;
+type TypeTransformer = (type: Type) => Type;
+type TypeCombiner = (types: Type[]) => Type;
+type TypeGenerator = (toCheck: any) => Type;
+type EnumValidator = (toCheck: any[]) => Type;
 
 export type VariableType = {
     undefined: Type;
@@ -28,17 +31,17 @@ export type VariableType = {
     object: Type;
     array: Type;
     any: Type,
-    and: FunctionThatReturnsType;
-    or: FunctionThatReturnsType;
-    not: FunctionThatReturnsType;
-    instanceOf: FunctionThatReturnsType;
-    typeOf: FunctionThatReturnsType;
-    in: FunctionThatReturnsType;
-    oneOf: FunctionThatReturnsType;
-    oneOfType: FunctionThatReturnsType;
-    arrayOf: FunctionThatReturnsType;
-    shape: FunctionThatReturnsType;
-    apply: FunctionThatReturnsType;
+    and: TypeCombiner;
+    or: TypeCombiner;
+    not: TypeTransformer;
+    instanceOf: TypeGenerator;
+    typeOf: TypeGenerator;
+    in: EnumValidator;
+    oneOf: EnumValidator;
+    oneOfType: TypeCombiner;
+    arrayOf: TypeTransformer;
+    shape: (typeShape: Record<string, Type>) => Type;
+    apply: (func: TypeChecker) => Type;
 };
 
 const VT: VariableType = {

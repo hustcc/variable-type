@@ -9,7 +9,7 @@ import Type from '../Type';
  * @param arr
  * @returns {Type}
  */
-export default function(arr: any[]) {
+export default function(arr: any[]): Type {
   return new Type(function(v) {
     return arr.includes(v);
   })
