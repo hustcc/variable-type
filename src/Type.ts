@@ -7,20 +7,20 @@ import _optional from './types/optional';
 export type TypeChecker = (t: any) => boolean;
 
 export default class Type {
-  type: TypeChecker;
+  readonly type: TypeChecker;
 
   constructor(type: TypeChecker){
     this.type = type;
   }
 
-  check: TypeChecker = (variable: any): boolean => {
+  readonly check: TypeChecker = (variable: any): boolean => {
     try {
       return this.type(variable);
     } catch {}
     return false;
   };
 
-  optional: () => Type = (): Type => {
+  readonly optional: () => Type = (): Type => {
     return _optional(this);
   };
 }

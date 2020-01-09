@@ -22,26 +22,26 @@ type TypeGenerator = (toCheck: any) => Type;
 type EnumValidator = (toCheck: any[]) => Type;
 
 export type VariableType = {
-    undefined: Type;
-    bool: Type;
-    func: Type;
-    number: Type;
-    string: Type;
-    null: Type;
-    object: Type;
-    array: Type;
-    any: Type,
-    and: TypeCombiner;
-    or: TypeCombiner;
-    not: TypeTransformer;
-    instanceOf: TypeGenerator;
-    typeOf: TypeGenerator;
-    in: EnumValidator;
-    oneOf: EnumValidator;
-    oneOfType: TypeCombiner;
-    arrayOf: TypeTransformer;
-    shape: (typeShape: Record<string, Type>) => Type;
-    apply: (func: TypeChecker) => Type;
+    readonly undefined: Type;
+    readonly bool: Type;
+    readonly func: Type;
+    readonly number: Type;
+    readonly string: Type;
+    readonly null: Type;
+    readonly object: Type;
+    readonly array: Type;
+    readonly any: Type,
+    readonly and: TypeCombiner;
+    readonly or: TypeCombiner;
+    readonly not: TypeTransformer;
+    readonly instanceOf: TypeGenerator;
+    readonly typeOf: TypeGenerator;
+    readonly in: EnumValidator;
+    readonly oneOf: EnumValidator;
+    readonly oneOfType: TypeCombiner;
+    readonly arrayOf: TypeTransformer;
+    readonly shape: (typeShape: Record<string, Type>) => Type;
+    readonly apply: (func: TypeChecker) => Type;
 };
 
 const VT: VariableType = {
