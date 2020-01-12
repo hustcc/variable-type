@@ -7,5 +7,3 @@ benchmark.ts
 .travis.yml
 index.html
 src/
-dist/perf/
-dist/tests/

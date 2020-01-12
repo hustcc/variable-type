@@ -2,7 +2,7 @@
   "name": "variable-type",
   "version": "1.0.0",
   "description": "Runtime type checking for variable and similar objects.",
-  "main": "dist/src/index.js",
+  "main": "lib/index.js",
   "scripts": {
     "coverage": "jest --coverage",
     "test": "jest",
@@ -39,10 +39,16 @@
     "typescript": "^3.7.4"
   },
   "jest": {
-    "roots": ["tests"],
+    "roots": [
+      "tests"
+    ],
     "preset": "ts-jest",
     "testEnvironment": "node",
-    "collectCoverageFrom": ["src/**/*.ts"],
-    "coveragePathIgnorePatterns": ["src/*.d.ts"]
+    "collectCoverageFrom": [
+      "src/**/*.ts"
+    ],
+    "coveragePathIgnorePatterns": [
+      "src/*.d.ts"
+    ]
   }
 }

@@ -4,7 +4,7 @@
  * 👏 08-01 is my birthday on ID card.
  */
 
-import Type, {TypeChecker} from './Type';
+import Type, { TypeChecker } from './Type';
 
 import and from './types/and';
 import apply from './types/apply';
