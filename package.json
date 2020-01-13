@@ -3,9 +3,11 @@
   "version": "1.0.0",
   "description": "Runtime type checking for variable and similar objects.",
   "main": "lib/index.js",
+  "files": [
+    "lib"
+  ],
   "scripts": {
-    "coverage": "jest --coverage",
-    "test": "jest",
+    "test": "jest --coverage",
     "perf": "ts-node perf/benchmark.ts",
     "build": "tsc"
   },

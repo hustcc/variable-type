@@ -4,7 +4,7 @@
  */
 import VT from '../src';
 import PT from 'prop-types';
-import Benchmark, {Suite, Event} from 'benchmark';
+import Benchmark, { Suite, Event } from 'benchmark';
 
 const suite = new Benchmark.Suite();
 

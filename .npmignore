@@ -1,9 +1,0 @@
-node_modules/
-.nyc_output/
-coverage/
-test.ts
-benchmark.ts
-.gitignore
-.travis.yml
-index.html
-src/

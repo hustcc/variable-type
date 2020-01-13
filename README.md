@@ -6,7 +6,12 @@
 > 
 > Inspired by [prop-types](https://github.com/facebook/prop-types).
 
-[![Ver](https://img.shields.io/npm/v/variable-type.svg)](https://www.npmjs.com/package/variable-type) [![Build Status](https://travis-ci.org/hustcc/variable-type.svg?branch=master)](https://travis-ci.org/hustcc/variable-type) [![Coverage Status](https://coveralls.io/repos/github/hustcc/variable-type/badge.svg?branch=master)](https://coveralls.io/github/hustcc/variable-type) [![npm download](https://img.shields.io/npm/dm/variable-type.svg)](https://www.npmjs.com/package/variable-type)
+[![npm Version](https://img.shields.io/npm/v/variable-type.svg)](https://www.npmjs.com/package/variable-type)
+[![Build Status](https://github.com/hustcc/variable-type/workflows/build/badge.svg)](https://github.com/hustcc/variable-type/actions)
+[![Coverage Status](https://coveralls.io/repos/github/hustcc/variable-type/badge.svg?branch=master)](https://coveralls.io/github/hustcc/variable-type?branch=master)
+[![npm download](https://img.shields.io/npm/dm/variable-type.svg)](https://www.npmjs.com/package/variable-type)
+[![npm License](https://img.shields.io/npm/l/variable-type.svg)](https://www.npmjs.com/package/variable-type)
+
 
 
 ## 1. Install
@@ -15,7 +20,7 @@
 
 Then import it.
 
-```typescript
+```ts
 import VT from 'variable-type';
 ```
 
@@ -93,9 +98,9 @@ VT.or([
  - `Array` type.
 
 ```js
-var arr = ['hello', 'world', 25, new Date(1992, 8, 1)];
+const arr = ['hello', 'world', 25, new Date(1992, 8, 1)];
  
-var types = VT.arrayOf(
+const types = VT.arrayOf(
   VT.or([
     VT.number,
     VT.string,
@@ -109,13 +114,13 @@ types.check(arr); // will get true.
  - `Object` type.
 
 ```js
-var obj = {
+const obj = {
   name: 'hustcc',
   boy: true,
   birthday: new Date(1992, 8, 1)
 };
  
-var types = VT.shape({
+const types = VT.shape({
   name: VT.string,
   boy: VT.bool,
   birthday: VT.instanceOf(Date)
@@ -191,11 +196,14 @@ VT.shape({
 ## 4. Test & Perf
 
 ```
-npm i
+# install dependence
+$ npm i
 
-npm run test
+# run unit test
+$ npm run test
 
-npm run perf
+# run performance test
+$ npm run perf
 ```
 
 > [OPS] variable-type / prop-types = 5.033
@@ -203,6 +211,6 @@ npm run perf
 
 ## License
 
-ISC@[hustcc](https://github.com/hustcc).
+MIT@[hustcc](https://github.com/hustcc).
 
 

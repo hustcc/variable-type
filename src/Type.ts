@@ -2,7 +2,7 @@
  * Created by hustcc on 17/08/01.
  */
 
-import _optional from './types/optional';
+import optionalChecker from './types/optional';
 
 export type TypeChecker = (t: any) => boolean;
 
@@ -21,6 +21,6 @@ export default class Type {
   };
 
   readonly optional: () => Type = (): Type => {
-    return _optional(this);
+    return optionalChecker(this);
   };
 }
