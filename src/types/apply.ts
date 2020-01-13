@@ -2,13 +2,13 @@
  * Created by hustcc on 17/08/01.
  */
 
-var Type = require('../Type');
+import Type, { TypeChecker } from '../Type';
 
 /**
  * apply 自定义
  * @param func
  * @returns {Type}
  */
-module.exports = function(func) {
+export default function(func: TypeChecker): Type {
   return new Type(func);
 };

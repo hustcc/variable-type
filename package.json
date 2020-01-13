@@ -1,12 +1,13 @@
 {
   "name": "variable-type",
-  "version": "0.2.1",
+  "version": "1.0.0",
   "description": "Runtime type checking for variable and similar objects.",
-  "main": "src/index.js",
+  "main": "lib/index.js",
   "scripts": {
-    "coverage": "nyc npm test && nyc report --reporter=lcov",
-    "test": "mocha tests/test.js",
-    "perf": "node perf/benchmark.js"
+    "coverage": "jest --coverage",
+    "test": "jest",
+    "perf": "ts-node perf/benchmark.ts",
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
@@ -26,12 +27,28 @@
   },
   "homepage": "https://github.com/hustcc/variable-type#readme",
   "devDependencies": {
+    "@types/benchmark": "^1.0.31",
+    "@types/jest": "^24.0.25",
+    "@types/prop-types": "^15.7.3",
     "benchmark": "^2.1.4",
-    "coveralls": "^2.11.6",
-    "expect": "^1.14.0",
-    "mocha": "^2.4.5",
-    "nyc": "^5.6.0",
+    "coveralls": "^3.0.9",
+    "jest": "^24.9.0",
     "prop-types": "^15.5.10",
-    "uglify-js": "^3.0.28"
+    "ts-jest": "^24.3.0",
+    "ts-node": "^8.5.4",
+    "typescript": "^3.7.4"
+  },
+  "jest": {
+    "roots": [
+      "tests"
+    ],
+    "preset": "ts-jest",
+    "testEnvironment": "node",
+    "collectCoverageFrom": [
+      "src/**/*.ts"
+    ],
+    "coveragePathIgnorePatterns": [
+      "src/*.d.ts"
+    ]
   }
 }
